@@ -10,7 +10,7 @@ export default function SearchBar() {
         <IoIosSearch fill="#939393" size={20} />
         <Form action={handleSearchAction}>
           <input
-            className="border-r-2 placeholder:text-[#939393] placeholder:text-center text-[14px] px-2 w-[130px]  focus:outline-none border-[#939393]"
+            className="border-r-2 bg-white dark:bg-white placeholder:text-[#939393] placeholder:text-center text-[14px] px-2 w-[130px]  focus:outline-none border-[#939393]"
             type="text"
             placeholder="Enter Your Role"
             name="role"
@@ -18,7 +18,7 @@ export default function SearchBar() {
           <select
           name="exp"
             defaultValue={""}
-            className="placeholder:text-left text-[14px] border-none focus:outline-none text-[#939393]"
+            className="placeholder:text-left bg-white dark:bg-white text-[14px] border-none focus:outline-none text-[#939393]"
           >
             <option value={""} disabled hidden>
               Experience
@@ -32,7 +32,7 @@ export default function SearchBar() {
           </select>
           <input
           name="location"
-            className="placeholder:text-[#939393] text-[14px] w-[130px] border-l-2 px-2 border-[#939393] focus:outline-none"
+            className="placeholder:text-[#939393] bg-white dark:bg-white text-[14px] w-[130px] border-l-2 px-2 border-[#939393] focus:outline-none"
             type="text"
             placeholder="Location"
           />

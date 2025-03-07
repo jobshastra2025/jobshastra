@@ -53,7 +53,7 @@ import {nanoid} from "@reduxjs/toolkit";
   
 
 export default function FeaturedJobsCard({company_logo,employment_type,designation,company_name,location_city
-  ,location_country, job_description, job_type}:FeaturedJobsCardType){
+  ,location_country, job_description, job_type}){
     return (<>
     { CARDS_DATA.map((item)=>{
      return ( <Card key={nanoid()}>

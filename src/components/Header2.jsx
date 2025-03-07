@@ -6,7 +6,7 @@ import ThemeController from "./ThemeController";
 export default function Header2() {
   return (
     <>
-      <header className=" hidden lg:w-full lg:flex lg:flex-col lg:justify-start lg:border lg:border-b-2 lg:border-[#C8C8CC]">
+      <header className="hidden lg:w-full lg:flex lg:flex-col lg:justify-start lg:border lg:border-b-2 lg:border-[#C8C8CC]">
         <div className="w-full h-8" />
         <div className="w-full flex flex-row justify-center px-8">
           <div className="w-[50%] flex flex-row justify-between items-center">
@@ -22,10 +22,10 @@ export default function Header2() {
               </Link>
             </div>
             <div className="inline-flex flex-row gap-x-[60px] font-semibold justify-between items-center">
-              <Link className="text-black" href={"#"}>
+              <Link className=" text-black" href={"/"}>
                 Find Jobs
               </Link>
-              <Link className="text-black" href={"#"}>
+              <Link className=" text-black" href={"/"}>
                 For Talent
               </Link>
             </div>
@@ -37,7 +37,7 @@ export default function Header2() {
             </Link>
             <Link
               href={"/signup"}
-              className="bg-[#4A42A3]  font-semibold hover:bg-[#4A42AF] rounded-[30px] text-[#FFFFFF] py-[10px] px-[30px] hover:ease-out hover:duration-300"
+              className="bg-[#4A42A3]  font-semibold hover:bg-[#4A42AF] rounded-[30px]  text-white py-[10px] px-[30px] hover:ease-out hover:duration-300"
             >
               Sign Up
             </Link>

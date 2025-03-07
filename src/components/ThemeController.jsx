@@ -1,7 +1,20 @@
+"use client";
 export default function ThemeController(){
+    
+  function handleThemeSwitch(e){
+    if(e.target.checked){
+      const html=document.querySelector("html");
+      html.setAttribute("data-theme","dark");
+    }
+    else {
+      const html=document.querySelector("html");
+      html.setAttribute("data-theme","light");
+    }
+          
+  }
     return (<><label className="swap swap-rotate">
         {/* this hidden checkbox controls the state */}
-        <input type="checkbox" className="theme-controller" value="synthwave" />
+        <input type="checkbox"  onChange={handleThemeSwitch} className="theme-controller" value="synthwave" />
       
         {/* sun icon */}
         <svg
