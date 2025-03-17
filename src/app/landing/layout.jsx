@@ -20,11 +20,8 @@ export const metadata = {
 
 export default function LandingLayout({ children }) {
   return (
-  <>
-    <MainLayout>
-    
-  {children}
-    
-  </MainLayout></>
+    <>
+      <MainLayout>{children}</MainLayout>
+    </>
   );
 }

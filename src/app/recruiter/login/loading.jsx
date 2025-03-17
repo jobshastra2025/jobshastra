@@ -1,3 +1,3 @@
 export default function RecruiterLoadingPage(){
-    return (<></>);
+    return (<h1>Loading Recruiter Page........</h1>);
 }

@@ -20,11 +20,10 @@ export const metadata = {
 
 export default function LoginLayout({ children }) {
   return (
-  <>
-    <MainLayout>
-    <MainBody>
-  {children}
-    </MainBody>
-  </MainLayout></>
+    <>
+      <MainLayout>
+        <MainBody>{children}</MainBody>
+      </MainLayout>
+    </>
   );
 }

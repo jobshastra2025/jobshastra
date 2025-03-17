@@ -4,15 +4,15 @@ import { IoMdMenu } from "react-icons/io";
 export default function Header1() {
   return (
     <>
-      <header className="lg:hidden w-full border-b-2 border-[#C8C8CC] flex flex-row justify-between items-center">
+      <header className="xl:hidden w-full bg-[#FAFAFF] border-b-2 border-[#C8C8CC] flex flex-row justify-between items-center">
         <div>
         <Link href={"/"}>
                 <Image
                   className="py-4"
                   src={"/images/logo.png"}
                   alt="logo"
-                  width={200}
-                  height={100}
+                  width={139}
+                  height={19}
                 />
               </Link>
         </div>

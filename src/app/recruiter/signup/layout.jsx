@@ -1,5 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+import "../../globals.css";
 import MainLayout from "@/components/MainLayout";
 import MainBody from "@/components/MainBody";
 
@@ -20,11 +20,10 @@ export const metadata = {
 
 export default function SignUpLayout({ children }) {
   return (
-  <>
-    <MainLayout>
-    <MainBody>
-  {children}
-    </MainBody>
-  </MainLayout></>
+    <>
+      <MainLayout>
+        <MainBody>{children}</MainBody>
+      </MainLayout>
+    </>
   );
 }

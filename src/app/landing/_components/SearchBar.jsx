@@ -1,5 +1,5 @@
 
-import { handleSearchAction } from "@/actions/actions";
+import { handleSearchAction } from "@/actions/landing";
 import Form from "next/form";
 import { IoIosSearch } from "react-icons/io";
 export default function SearchBar() {

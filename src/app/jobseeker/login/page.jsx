@@ -1,7 +1,13 @@
+import JobSeekerEmployerButton from "@/components/JobSeekerEmployerButton";
+import JobSeekerLoginBody from "../_components/JobSeekerLoginBody";
+
 export default function JobSeekerLoginPage() {
   return (
     <>
-      <div>Login Page</div>
+      <div className="flex flex-col items-center justify-start w-full gap-2">
+        <JobSeekerEmployerButton />
+        <JobSeekerLoginBody />
+      </div>
     </>
   );
 }

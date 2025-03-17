@@ -1,3 +1,13 @@
-export default function RecruiterSignUpPage(){
-    return (<h1>Recruiter Sign Up Page</h1>);
+import RecruiterSignUpBody from "../_components/RecruiterSignUpBody";
+import JobSeekerEmployerButton from "@/components/JobSeekerEmployerButton";
+
+export default function RecruiterSignUpPage() {
+  return (
+    <>
+      <div className="flex flex-col items-center justify-start w-full gap-2">
+        <JobSeekerEmployerButton />
+        <RecruiterSignUpBody />
+      </div>
+    </>
+  );
 }

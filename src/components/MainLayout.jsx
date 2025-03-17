@@ -7,7 +7,7 @@ export default function MainLayout({ children }) {
     <>
       <Header1 />
       <Header2 />
-      <main className="#FAFAFF">{children}</main>
+      <main className="bg-[#FAFAFF]">{children}</main>
       <Footer />
     </>
   );
