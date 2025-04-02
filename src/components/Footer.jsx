@@ -18,9 +18,9 @@ export default function Footer() {
   ];
   return (
     <>
-      <footer className="bg-[#4A42A3] ">
+      <footer className="bg-[#4A42A3] mt-10">
         <div className="container mx-auto gap-y-5 py-8">
-          <div className="mx-20  gap-x-16  flex flex-row justify-between items-start">
+          <div className="mx-20  gap-x-16 flex-col flex lg:flex-row  justify-between items-start">
             <div className="flex flex-col justify-between items-start gap-y-6">
               <Image
                 src={"/images/logowhite.png"}
@@ -33,9 +33,9 @@ export default function Footer() {
                 startups. Find your dream job easier.
               </span>
             </div>
-            <div className="flex flex-row justify-between items-start gap-x-10">
+            <div className="flex flex-col gap-y-10 md:flex-row md:gap-x-10 justify-between items-start ">
               <div className="flex flex-row justify-between items-start gap-x-10">
-                <div className="  flex flex-col justify-between items-start gap-y-4">
+                <div className="flex flex-col justify-between items-start gap-y-4">
                   <h1 className="text-white font-bold">About</h1>
                   <ul className=" gap-y-6 justify-between flex flex-col items-start text-nowrap">
                     <li>
@@ -80,7 +80,7 @@ export default function Footer() {
                     </li>
                   </ul>
                 </div>
-                <div className=" flex flex-col justify-between items-start gap-y-4">
+                <div className="flex flex-col justify-between items-start gap-y-4">
                   <h1 className="font-bold text-white ">Resources</h1>
                   <ul className="gap-y-6 justify-between flex flex-col text-nowrap items-start">
                     <li>
@@ -118,7 +118,7 @@ export default function Footer() {
                   </ul>
                 </div>
               </div>
-              <div className=" flex flex-col items-start justify-between gap-y-4">
+              <div className="flex flex-col items-start justify-between gap-y-4">
                 <div>
                   <h3 className="text-[16px]  text-white font-bold">
                     Get job notifications
@@ -145,7 +145,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          <div className="mx-20 border-t-2 mt-10 pt-10 border-[#5C55AC] flex flex-row justify-between items-center">
+          <div className="mx-20 border-t-2 mt-10 pt-10 border-[#5C55AC] flex flex-col md:flex-row gap-y-4 md:gap-y-0 justify-between items-center">
             <div className="">
               <h5 className="text-[#A4A0D1]">
                 2024 &copy; JobShastra. All rights reserved.

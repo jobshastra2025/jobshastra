@@ -1,4 +1,6 @@
 "use client";
 export default function RecruiterErrorPage(){
-    return (<></>)
+    return (<>
+        <div>This is error page</div>
+    </>)
 }

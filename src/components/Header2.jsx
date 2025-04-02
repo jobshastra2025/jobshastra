@@ -32,11 +32,11 @@ export default function Header2() {
           </div>
           <div className="w-[50%] gap-x-5 flex flex-row justify-end items-center">
             <ThemeController/>
-            <Link href={"/login"} className="text-[#4A42A3] font-semibold">
+            <Link href={"/jobseeker/login"} className="text-[#4A42A3] font-semibold">
               Login
             </Link>
             <Link
-              href={"/signup"}
+              href={"/jobseeker/signup"}
               className="bg-[#4A42A3]  font-semibold hover:bg-[#4A42AF] rounded-[30px]  text-white py-[10px] px-[30px] hover:ease-out hover:duration-300"
             >
               Sign Up
