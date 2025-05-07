@@ -2,50 +2,77 @@
 // new code 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase'; // Adjust the import path as necessary
-
+import { createClient } from '@/utils/supabase/client'
 
 const ProfileDetails = () => {
   const router = useRouter();
-
-  const [fullName, setFullName] = useState("");
+  const supabase = createClient()
+  
+  const [full_name, setFull_name] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
+  const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("");
   const [location, setLocation] = useState(""); 
   const [linkedin, setLinkedin] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [dob, setDob] = useState("");
   const [formerror, setFormError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!fullName || !email || !phoneNo || !gender || !location || !linkedin || !birthDate) {
+  
+    if (!full_name || !email || !phone || !gender || !location || !linkedin || !dob) {
       setFormError("Please fill in all fields");
       return;
     }
-    
+
+  
+    // Get current authenticated user
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+  
+    if (userError || !user) {
+      setFormError("Unable to get user info");
+      console.error(userError);
+      router.push('/jobseeker/login'); // Redirect to login if user is not authenticated
+      return;
+    }
+    // if(error) throw new Error(error.message);
+
     const { data, error } = await supabase
-    .from("personalinfo")
-    .insert([{ fullName, email, phoneNo, gender, birthDate, location, linkedin }])
-    
+      .from("profile")
+      .insert([
+        {
+          user_id: user.id,  // Assuming your table has a `user_id` column
+          full_name,
+          email,
+          phone,
+          gender,
+          dob,
+          location,
+          linkedin,
+        },
+      ]);
+  
     if (error) {
       setFormError(error.message);
       return;
     }
+
+    router.push('/profileSetup/professionalInfo');
+    
+    // Optionally, you can redirect or show a success message here
     if (data) {
       console.log(data);
       setFormError(null);
-      router.push('/');
-        
+      // redirect ('/');
     }
-  
   };
-
-
 
   return (
     <div className='lg:max-w-screen-xl pb-20 m-[30px] lg:m-[0px] lg:mx-auto '>
@@ -84,37 +111,37 @@ const ProfileDetails = () => {
           
             <form onSubmit={handleSubmit}>
               <div className='form-group'>
-                <label htmlFor='fullName' className='flex font-semibold'>Full Name *</label>
+                <label htmlFor='full_name' className='flex text-md font-semibold'>Full Name *</label>
                 <input
-                  className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                  className='border-2 text-md border-solid w-full px-5 py-2 my-3 rounded-lg'
                   type='text'
-                  id='fullName'
-                  name='fullName'
+                  id='full_name'
+                  name='full_name'
                   placeholder='Enter your Name'
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                  value={full_name}
+                  onChange={(e) => setFull_name(e.target.value)}
                   required
                 />
               </div>
 
               <div className='md:flex gap-8 xl:gap-10 w-[max-content]'>
                 <div className='form-group'>
-                  <label htmlFor='phoneNo' className='flex font-semibold'>Phone phoneNo *</label>
+                  <label htmlFor='phone' className='flex text-md font-semibold'>Phone phone *</label>
                   <input
-                    className='border-2 border-solid w-[80%] xl:w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 text-md border-solid w-[80%] xl:w-full px-5 py-2 my-3 rounded-lg'
                     type='tel'
-                    id='phoneNo'
-                    name='phoneNo'
+                    id='phone'
+                    name='phone'
                     placeholder='+91 8888888888'
-                    value={phoneNo}
-                    onChange={(e) => setPhoneNo(e.target.value)}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     required
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='email' className='flex font-semibold'>Email *</label>
+                  <label htmlFor='email' className='flex text-md font-semibold'>Email *</label>
                   <input
-                    className='border-2 border-solid w-[80%] xl:w-full  px-5 py-2 my-3 rounded-lg'
+                    className='border-2 text-md border-solid w-[80%] xl:w-full  px-5 py-2 my-3 rounded-lg'
                     type='email'
                     id='email'
                     name='email'
@@ -129,21 +156,21 @@ const ProfileDetails = () => {
               
               <div className='md:flex gap-10 xl:gap-20 w-[max-content]'>
                 <div className='form-group'>
-                  <label className='flex font-semibold'>birthDate of Birth</label>
+                  <label className='flex text-md font-semibold'>Date of Birth</label>
                   <input
-                    className='border-2 w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg'
                     type='date'
-                    name='birthDate'
-                    value={birthDate}
-                    onChange={(e) => setBirthDate(e.target.value)}
+                    name='dob'
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
                     required
                   />
                 </div>
                 <div className='form-group'>
-                  <label className='flex font-semibold'>Gender</label>
+                  <label className='flex text-md font-semibold'>Gender</label>
                   <select
                     name='gender'
-                    className='border-2 w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg'
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                   >
@@ -155,8 +182,8 @@ const ProfileDetails = () => {
                 </div>
               </div>
               <div className='form-group'>
-                <label htmlFor='location' className='flex font-semibold'>Location *</label>
-                <input className='border-2 w-full px-5 py-2 my-3 rounded-lg' 
+                <label htmlFor='location' className='flex text-md font-semibold'>Location *</label>
+                <input className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg' 
                 type='text' 
                 id='location' 
                 name='location' 
@@ -166,8 +193,8 @@ const ProfileDetails = () => {
                 />
               </div>
               <div className='form-group'>
-                <label htmlFor='linkedin' className='flex font-semibold'>LinkedIn Profile Link *</label>
-                <input className='border-2 w-full px-5 py-2 my-3 rounded-lg' 
+                <label htmlFor='linkedin' className='flex text-md font-semibold'>LinkedIn Profile Link *</label>
+                <input className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg' 
                 type='linkedin'
                 id='linkedin' 
                 name='linkedin' 

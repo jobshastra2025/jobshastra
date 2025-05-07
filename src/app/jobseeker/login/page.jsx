@@ -1,5 +1,5 @@
-import JobSeekerEmployerButton from "@/components/JobSeekerEmployerButton";
-import JobSeekerLoginBody from "../_components/JobSeekerLoginBody";
+import JobSeekerEmployerButton from '@/components/JobSeekerEmployerButton';
+import JobSeekerLoginBody from './components/JobSeekerLoginBody';
 
 
 export default function JobSeekerLoginPage() {

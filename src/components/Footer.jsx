@@ -129,14 +129,14 @@ export default function Footer() {
                     The latest job news, articles, sent to your inbox weekly.
                   </span>
                 </div>
-                <div className="flex flex-row justify-between items-center gap-x-2">
+                <div className="sm:flex flex-row justify-between items-center gap-x-2">
                   <input
-                    className="bg-white  focus:outline-none text-black text-[14px] px-3 py-2 placeholder:text-black"
+                    className="bg-white mb-4 sm:mb-0  focus:outline-none text-black text-[14px] px-3 py-2 placeholder:text-black"
                     type="email"
                     placeholder="Email Address"
                   />
                   <button
-                    className="bg-white text-black text-[14px] px-3 py-2 font-bold"
+                    className="bg-white text-black text-[14px] px-3 py-2 font-bold flex w-max mx-auto"
                     type="submit"
                   >
                     Submit
