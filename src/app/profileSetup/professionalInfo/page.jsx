@@ -1,13 +1,16 @@
 // Note: Professional Information Page
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase'; 
+import { createClient } from '@/utils/supabase/client';
 
 const professionalInfoPage = () => {
   const router = useRouter();
+  const supabase = createClient()
+
   const [jobTitle, setJobTitle] = useState("");
   const [experience, setExperience] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -29,23 +32,99 @@ const professionalInfoPage = () => {
       return;
     }
     
+    // Get current authenticated user
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+  
+    if (userError) {
+      setFormError("Unable to get user info");
+      console.error(userError);
+      return;
+    }
+    // if(error) throw new Error(error.message);
+
     const { data, error } = await supabase
-    .from("professionalinfo")
-    .insert([{ jobTitle, experience, companyName, portfolioLink, skills, resume, industryType, duration, noticePeriod, annualSalary }])
+    .from("profile")
+    .update({
+      jobTitle,
+      experience,
+      companyName,
+      portfolioLink,
+      skills,
+      resume,
+      industryType,
+      duration,
+      noticePeriod,
+      annualSalary,
+    })
+    .eq("user_id", user.id); // Make sure to filter the row
     
+
+  
     if (error) {
       setFormError(error.message);
       return;
     }
+
+    router.push('/profileSetup/educationalInfo');
+    
+    // Optionally, you can redirect or show a success message here
     if (data) {
       console.log(data);
       setFormError(null);
-      router.push('/');
-        
+      // redirect ('/');
     }
   
-  
   };
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+      if (userError || !user) {
+        console.error("Error getting user:", userError);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("profile")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+
+      if (error) {
+        console.error("Error fetching profile:", error);
+      } 
+      if (
+        !data?.full_name ||
+        !data?.email ||
+        !data?.phone ||
+        !data?.gender ||
+        !data?.dob ||
+        !data?.location ||
+        !data?.linkedin 
+      ) {
+        router.push("/profileSetup"); // 🔁 Redirect user back to education form
+        return;
+      }
+        setJobTitle(data.jobTitle || "");
+        setExperience(data.experience || "");
+        setCompanyName(data.companyName || "");
+        setPortfolioLink(data.portfolioLink || "");
+        setSkills(data.skills || "");
+        setResume(data.resume || "");
+        setIndustryType(data.industryType || "");
+        setDuration(data.duration || "");
+        setNoticePeriod(data.noticePeriod || "");
+        setAnnualSalary(data.annualSalary || "");
+      
+    };
+
+    fetchProfile();
+  }, []);
+
 
   return (
     <div className='max-w-screen-xl pb-20   mx-auto '>
@@ -59,9 +138,9 @@ const professionalInfoPage = () => {
           
             <form onSubmit={handleSubmit}>
               <div className='form-group'>
-                <label htmlFor='jobTitle' className='flex font-semibold'>Job Title *</label>
+                <label htmlFor='jobTitle' className='flex text-md font-semibold'>Job Title *</label>
                 <input
-                  className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                  className='border-2 text-md border-solid md:w-full px-5 py-2 my-3 rounded-lg'
                   type='text'
                   id='jobTitle'
                   name='jobTitle'
@@ -72,11 +151,11 @@ const professionalInfoPage = () => {
                 />
               </div>
 
-              <div className='flex gap-10 w-[max-content]'>
+              <div className='sm:flex gap-10 w-[max-content]'>
                 <div className='form-group'>
-                  <label htmlFor='experience' className='flex font-semibold'>Experience *</label>
+                  <label htmlFor='experience' className='flex text-md font-semibold'>Experience *</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 text-md border-solid w-full px-5 py-2 my-3 rounded-lg'
                     type='text'
                     id='experience'
                     name='experience'
@@ -87,9 +166,9 @@ const professionalInfoPage = () => {
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='companyName' className='flex font-semibold'>Company Name *</label>
+                  <label htmlFor='companyName' className='flex text-md font-semibold'>Company Name *</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 text-md border-solid w-full px-5 py-2 my-3 rounded-lg'
                     type='text'
                     id='companyName'
                     name='companyName'
@@ -101,11 +180,11 @@ const professionalInfoPage = () => {
                 </div>
               </div>
               {/* new */}
-              <div className='flex gap-10 w-[max-content]'>
+              <div className='sm:flex gap-10 w-[max-content]'>
                 <div className='form-group'>
-                  <label htmlFor='industryType' className='flex font-semibold'>Industry Type*</label>
+                  <label htmlFor='industryType' className='flex text-md font-semibold'>Industry Type*</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 border-solid text-md w-full px-5 py-2 my-3 rounded-lg'
                     type='text'
                     id='industryType'
                     name='industryType'
@@ -116,9 +195,9 @@ const professionalInfoPage = () => {
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='duration' className='flex font-semibold'>Duration *</label>
+                  <label htmlFor='duration' className='flex text-md font-semibold'>Duration *</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 border-solid text-md w-full px-5 py-2 my-3 rounded-lg'
                     type='number'
                     id='duration'
                     name='duration'
@@ -129,11 +208,11 @@ const professionalInfoPage = () => {
                   />
                 </div>
               </div>
-              <div className='flex gap-10 w-[max-content]'>
+              <div className='sm:flex gap-10 w-[max-content]'>
                 <div className='form-group'>
-                  <label htmlFor='annualSalary' className='flex font-semibold'>Annual Salary *</label>
+                  <label htmlFor='annualSalary' className='flex text-md font-semibold'>Annual Salary *</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 border-solid w-full text-md px-5 py-2 my-3 rounded-lg'
                     type='number'
                     id='annualSalary'
                     name='annualSalary'
@@ -144,9 +223,9 @@ const professionalInfoPage = () => {
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='noticePeriod' className='flex font-semibold'>Notice period *</label>
+                  <label htmlFor='noticePeriod' className='flex text-md font-semibold'>Notice period *</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 border-solid w-full text-md px-5 py-2 my-3 rounded-lg'
                     type='number'
                     id='noticePeriod'
                     name='noticePeriod'
@@ -158,11 +237,11 @@ const professionalInfoPage = () => {
                 </div>
               </div>
               {/* new */}
-              <div className='flex gap-10 w-[max-content]'>
+              <div className='sm:flex gap-10 w-[max-content]'>
                 <div className='form-group'>
-                  <label htmlFor='resume' className='flex font-semibold'>Your Resume*</label>
+                  <label htmlFor='resume' className='flex text-md font-semibold'>Your Resume*</label>
                   <input
-                    className='border-2 border-solid w-full px-5 py-2 my-3 rounded-lg'
+                    className='border-2 border-solid w-full text-md px-5 py-2 my-3 rounded-lg'
                     type='url'
                     id='resume'
                     name='resume'
@@ -176,8 +255,8 @@ const professionalInfoPage = () => {
               </div>
               
               <div className='form-group'>
-                <label htmlFor='skills' className='flex font-semibold'>skills *</label>
-                <input className='border-2 w-full px-5 py-2 my-3 rounded-lg' 
+                <label htmlFor='skills' className='flex text-md font-semibold'>skills *</label>
+                <input className='border-2 md:w-full text-md px-5 py-2 my-3 rounded-lg' 
                 type='text' 
                 id='skills' 
                 name='skills' 
@@ -187,8 +266,8 @@ const professionalInfoPage = () => {
                 />
               </div>
               <div className='form-group'>
-                <label htmlFor='portfolioLink' className='flex font-semibold'>Portfolio Link *</label>
-                <input className='border-2 w-full px-5 py-2 my-3 rounded-lg' 
+                <label htmlFor='portfolioLink' className='flex text-md font-semibold'>Portfolio Link *</label>
+                <input className='border-2 md:w-full px-5 text-md py-2 my-3 rounded-lg' 
                 type='url' 
                 id='portfolioLink' 
                 name='portfolioLink' 

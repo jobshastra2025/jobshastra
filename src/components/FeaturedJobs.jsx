@@ -8,7 +8,7 @@ export default function FeaturedJobs(){
         </div>
         <div className="flex flex-col justify-center items-center">
             <div className="">
-
+                
             </div>
         </div>
     </section>
