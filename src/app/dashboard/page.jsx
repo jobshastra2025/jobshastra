@@ -3,7 +3,7 @@ import DashHeader from './_components/DashHeader'
 import DashStatus from './_components/DashStatus'
 import DashHistory from './_components/DashHistory'
 import SideBar1 from './_components/SideBar1'
-import StuApplicationsHistory from './_components/StuApplicationsHistory'
+
 
 function page() {
   return (
@@ -12,13 +12,13 @@ function page() {
           <SideBar1/>
         </div>
         <div className="w-full p-4">
-          <DashHeader/>
+          <DashHeader headertext="Dashboard"/>
           <DashStatus/>
           <DashHistory/>
         </div>
         
     </div>
-    // <StuApplicationsHistory/>
+    
   )
 }
 
