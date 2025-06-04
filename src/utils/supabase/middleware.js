@@ -42,10 +42,12 @@ export async function updateSession(request) {
       !request.nextUrl.pathname.startsWith('/jobseeker/login') &&
       !request.nextUrl.pathname.startsWith('/auth')
     ) {
-      // no user, potentially respond by redirecting the user to the login page
-      // const url = request.nextUrl.clone()
-      // url.pathname = '/jobseeker/login'
-      // return NextResponse.redirect(url)
+       // 🚨 This code protects private routes like /dashboard — if no user, redirect to login
+        if (request.nextUrl.pathname.startsWith('/dashboard')) {
+          const url = request.nextUrl.clone()
+          url.pathname = '/jobseeker/login'
+          return NextResponse.redirect(url)
+        }
     }
   
     // IMPORTANT: You *must* return the supabaseResponse object as it is.

@@ -8,21 +8,20 @@ import { redirect, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase'; // Adjust the import path as necessary
 import { createClient } from '@/utils/supabase/client'
 
-const EmployerDeatils = () => {
+const EmployerDetails = () => {
   const router = useRouter();
   const supabase = createClient()
   
-  const [company_name, setCompany_name] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [company_size, setCompany_size] = useState("");
-  const [location, setLocation] = useState(""); 
-  const [companyurl, setCompanyurl] = useState("");
+  const [full_name, setFull_name] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [job_type, setJob_type] = useState("");
   const [formerror, setFormError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    if (!company_name || !industry || !company_size || !location || !companyurl ) {
+    if (!full_name || !email || !phone || !job_type) {
       setFormError("Please fill in all fields");
       return;
     }
@@ -47,11 +46,10 @@ const EmployerDeatils = () => {
       .insert([
         {
           user_id: user.id,  // Assuming your table has a `user_id` column
-          company_name,
-          industry,
-          company_size,
-          location,
-          companyurl,
+          full_name,
+          email,
+          phone,
+          job_type,
         },
       ]);
   
@@ -107,70 +105,65 @@ const EmployerDeatils = () => {
           
             <form onSubmit={handleSubmit}>
               <div className='form-group'>
-                <label htmlFor='company_name' className='flex text-md font-semibold'>Full Name *</label>
+                <label htmlFor='full_name' className='flex text-md font-semibold'>Full Name *</label>
                 <input
                   className='border-2 text-md border-solid w-full px-5 py-2 my-3 rounded-lg'
                   type='text'
-                  id='company_name'
-                  name='company_name'
-                  placeholder='Enter your Comapany Name'
-                  value={company_name}
-                  onChange={(e) => setCompany_name(e.target.value)}
+                  id='full_name'
+                  name='full_name'
+                  placeholder='Enter your Name'
+                  value={full_name}
+                  onChange={(e) => setFull_name(e.target.value)}
                   required
                 />
               </div>
 
               <div className='md:flex gap-8 xl:gap-10 w-[max-content]'>
                 <div className='form-group'>
-                  <label htmlFor='company_size' className='flex text-md font-semibold'>company_size *</label>
+                  <label htmlFor='phone' className='flex text-md font-semibold'>Phone phone *</label>
                   <input
                     className='border-2 text-md border-solid w-[80%] xl:w-full px-5 py-2 my-3 rounded-lg'
-                    type='number'
-                    id='company_size'
-                    name='company_size'
+                    type='tel'
+                    id='phone'
+                    name='phone'
                     placeholder='+91 8888888888'
-                    value={company_size}
-                    onChange={(e) => setCompany_size(e.target.value)}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     required
                   />
                 </div>
                 <div className='form-group'>
-                  <label htmlFor='industry' className='flex text-md font-semibold'>industry *</label>
+                  <label htmlFor='email' className='flex text-md font-semibold'>Email *</label>
                   <input
                     className='border-2 text-md border-solid w-[80%] xl:w-full  px-5 py-2 my-3 rounded-lg'
-                    type='text'
-                    id='industry'
-                    name='industry'
+                    type='email'
+                    id='email'
+                    name='email'
                     placeholder='example@gmail.com'
-                    value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
               </div>
 
-              <div className='form-group'>
-                <label htmlFor='location' className='flex text-md font-semibold'>Location *</label>
-                <input className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg' 
-                type='text' 
-                id='location' 
-                name='location' 
-                placeholder='Enter your location' 
-                value={location} 
-                onChange={(e) => setLocation(e.target.value)} required 
-                />
+              
+              <div className='md:flex gap-10 xl:gap-20 w-[max-content]'>
+                <div className='form-group'>
+                  <label className='flex text-md font-semibold'>Job Type</label>
+                  <input
+                    className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg'
+                    type='text'
+                    id='job_type'
+                    name='job_type'
+                    value={job_type}
+                    onChange={(e) => setJob_type(e.target.value)}
+                    required
+                  />
+                </div>
+               
               </div>
-              <div className='form-group'>
-                <label htmlFor='companyurl' className='flex text-md font-semibold'>companyurl Profile Link *</label>
-                <input className='border-2 text-md w-full px-5 py-2 my-3 rounded-lg' 
-                type='companyurl'
-                id='companyurl' 
-                name='companyurl' 
-                placeholder='Enter companyurl Profile Link' 
-                value={companyurl} 
-                onChange={(e) => setCompanyurl(e.target.value)}
-                />
-              </div>
+              
 
               <div className='flex justify-center lg:justify-end'>
                 <button type='submit' className='btn text-white bg-[#4A42A3] hover:bg-[#4A42A3] rounded-full text-sm px-4 py-2'>Save and Next</button>
@@ -184,4 +177,4 @@ const EmployerDeatils = () => {
   );
 };
 
-export default EmployerDeatils;
+export default EmployerDetails;

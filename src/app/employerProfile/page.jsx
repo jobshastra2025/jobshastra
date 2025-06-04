@@ -1,6 +1,6 @@
 
 // import React from "react";
-import EmployerDeatils from "./_components/EmployerDeatils";
+import CompanyDeatils from "./_components/CompanyDeatils";
 import ProfileInfoBar from "./_components/ProfileInfoBar";
 import ProfileStatusBar from "./_components/ProfileStatusBar";
 
@@ -11,7 +11,7 @@ export default function profileSetup(){
      <div>
         {/* <ProfileStatusBar/>
         <ProfileInfoBar/> */}
-        <EmployerDeatils/>
+        <CompanyDeatils/>
      </div>
     );
 }
