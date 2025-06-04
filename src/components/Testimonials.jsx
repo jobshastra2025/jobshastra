@@ -9,7 +9,7 @@
 export default function Testimonials(){
     return (<>
     <div className="container mx-auto">
-      <div className="px-24"><h1 className="text-[#4A42A3] font-bold">Testimonials</h1></div>
+      <div className="px-10 lg:px-24"><h1 className="text-[#4A42A3] w-[max-content] font-bold">Testimonials</h1></div>
     <div className="flex flex-col justify-center items-center">
         {/* <Carousel className="w-full max-w-lg">
       <CarouselContent className="-ml-1">

@@ -1,5 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
+<<<<<<< HEAD
 import "../../globals.css";
+=======
+// import "../globals.css";
+>>>>>>> vivek
 import MainLayout from "@/components/MainLayout";
 import MainBody from "@/components/MainBody";
 

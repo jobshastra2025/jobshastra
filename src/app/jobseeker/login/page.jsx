@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import JobSeekerEmployerButton from "@/components/JobSeekerEmployerButton";
 import JobSeekerLoginBody from "../_components/JobSeekerLoginBody";
+=======
+import JobSeekerEmployerButton from '@/components/JobSeekerEmployerButton';
+import JobSeekerLoginBody from './components/JobSeekerLoginBody';
+
+>>>>>>> vivek
 
 export default function JobSeekerLoginPage() {
   return (
