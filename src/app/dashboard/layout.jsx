@@ -3,7 +3,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 // import "../../globals.css";
 
-import MainLayout from "@/components/MainLayout";
+import SubLayout from "@/components/SubLayout";
 import MainBody from "@/components/MainBody";
 
 const geistSans = Geist({
@@ -24,10 +24,10 @@ export const metadata = {
 export default function profileSetupLayout({ children }) {
   return (
   <>
-    <MainLayout>
+    <SubLayout>
     {/* <MainBody> */}
   {children}
     {/* </MainBody> */}
-  </MainLayout></>
+  </SubLayout></>
   );
 }

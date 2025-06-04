@@ -5,6 +5,7 @@ import Testimonials from "@/components/Testimonials";
 import React from "react";
 import Hiring from "./_components/Hiring";
 import MainBody from "@/components/MainBody";
+import TestimonialsSlider from "@/components/TestimonialsSlider";
 
 export default function HomePage() {
   return (
@@ -14,7 +15,8 @@ export default function HomePage() {
       </MainBody>
       <Ribbon/>
       <FeaturedJobs />
-      <Testimonials />
+      {/* <Testimonials /> */}
+      <TestimonialsSlider/>
     </>
   );
 }

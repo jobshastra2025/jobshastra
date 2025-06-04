@@ -7,16 +7,21 @@ import SideBar1 from './_components/SideBar1'
 
 function page() {
   return (
-    <div className='flex min-h-screen '>
+    <div>
+      <div>
+        <DashHeader headertext="Dashboard"/>
+      </div>
+      <div className='flex  '>
         <div className='md:bg-[#E9EBFD]'>
           <SideBar1/>
         </div>
         <div className="w-full p-4">
-          <DashHeader headertext="Dashboard"/>
+          
           <DashStatus/>
           <DashHistory/>
         </div>
         
+      </div>
     </div>
     
   )

@@ -6,9 +6,9 @@ import ThemeController from "./ThemeController";
 export default function Header2() {
   return (
     <>
-      <header className="hidden lg:w-full lg:flex lg:flex-col lg:justify-start lg:border lg:border-b-2 lg:border-[#C8C8CC]">
+      <header className="hidden lg:w-full lg:flex lg:flex-col lg:justify-start lg:border lg:border-b-2 lg:border-[#C8C8CC] px-5 sm:px-7 lg:px-36">
         <div className="w-full h-8" />
-        <div className="w-full flex flex-row justify-center px-8">
+        <div className="w-full flex flex-row justify-center">
           <div className="w-[50%] flex flex-row justify-between items-center">
             <div>
               <Link href={"/"}>

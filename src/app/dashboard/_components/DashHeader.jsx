@@ -1,11 +1,27 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
+import Image from "next/image";
 
 function DashHeader({headertext}) {
   return (
-    <div className='w-full'>
-      <div className='sm:flex justify-between items-center bg-white border-b-2 border-[#D6DDEB] px-4 sm:px-6 lg:px-8 xl:px-[32px] py-4 sm:py-6 lg:py-8'>
+    <div className=' sm:flex gap-4 items-center'>
+      {/* new */}
+        {/* <div>
+          <Link href={"/"}>
+                  <Image
+                    className="p-3 mt-2 sm:mt-4"
+                    src={"/images/logo.png"}
+                    alt="logo"
+                    width={200}
+                    height={100}
+                  />
+          </Link>
+               
+        </div> */}
+
+
+      <div className='w-full sm:flex justify-between items-center bg-white border-b-2 border-[#D6DDEB] px-4 sm:px-6 lg:px-8 xl:px-[32px] py-4 sm:py-6 lg:py-8'>
         <div>
           <h2 className='text-2xl sm:text-3xl lg:text-[32px] font-bold leading-tight mb-2 sm:mb-0'>
             {headertext}

@@ -39,6 +39,8 @@ function SideBar1() {
         <RxHamburgerMenu />
       </button>
 
+       
+
       {/* Desktop Sidebar */}
       <motion.div
         initial={{ width: 60 }}
@@ -46,6 +48,8 @@ function SideBar1() {
         transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
         className="hidden md:flex h-screen text-[#7C8493] bg-[#E9EBFD] p-5"
       >
+       
+
         <div className="flex flex-col gap-4 mt-4">
           {menuItems.map((item, index) => (
             <Link

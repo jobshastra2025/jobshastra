@@ -1,19 +1,32 @@
-import { NextRequest } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
+import { NextResponse } from 'next/server'
 
 export async function middleware(request) {
-  return await updateSession(request)
+  const response = await updateSession(request)
+
+  const protectedPaths = ['/dashboard'] // ✅ List of protected routes
+  const currentPath = request.nextUrl.pathname
+
+  const isProtectedRoute = protectedPaths.some((path) =>
+    currentPath.startsWith(path)
+  )
+
+  const userToken = request.cookies.get('sb-access-token') // ✅ Supabase auth token
+
+  // This code for the user route protected
+  // 🚨 Redirect to login if accessing a protected route without being authenticated
+  // if (isProtectedRoute && !userToken) {
+  //   const loginUrl = request.nextUrl.clone()
+  //   loginUrl.pathname = '/jobseeker/login'
+  //   return NextResponse.redirect(loginUrl)
+  // }
+
+  return response
 }
 
+// ✅ Apply middleware globally except for static/image assets
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
